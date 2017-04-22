@@ -22,13 +22,9 @@ class Server {
    */
   start() {
     const app = this._express();
-
     app.use('/', this._router.build());
-
     const server = this._http.createServer(app);
-
     server.listen(3000);
-
     this._serverCloser.on('close', () => {
       server.close();
       this._mongodb.close();
