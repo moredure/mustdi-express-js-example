@@ -14,6 +14,7 @@ class ExpressTestApplication {
       './models/*.model.js',
       './routers/*.router.js',
       './config/*.config.js',
+      './logger/*.logger.js',
     ]);
     container.getBean('Server').start();
   }

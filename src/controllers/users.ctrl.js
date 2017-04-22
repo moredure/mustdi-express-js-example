@@ -8,10 +8,12 @@ class UsersController {
    * @param {ServerCloser} router some router
    * @param {User} user model
    * @param {DiExternalDependency} $ react-autobind
+   * @param {Logger} logger logger
    */
-  constructor(serverCloser, User, $) {
+  constructor(serverCloser, User, $, logger) {
     this._serverCloser = serverCloser;
     this._User = User;
+    this._logger = logger;
     $(this);
   }
   /**
@@ -25,6 +27,7 @@ class UsersController {
       .create({name: 'Mark Tsukerberg'})
       .then((user) => {
         res.json(user);
+        this._logger.log('Created user', user);
         this._serverCloser.emit('close');
       })
       .catch((x) => res.send(JSON.stringify(x)));
