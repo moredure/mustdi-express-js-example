@@ -6,6 +6,7 @@ class User {
    * User constructor
    * @singleton
    * @param {MongoDb} db db
+   * @param {User} db db
    * @return mongoose driver
    */
   constructor(db) {
