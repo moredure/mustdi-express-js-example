@@ -1,7 +1,4 @@
 /**
- * UsersController class
- */
-/**
  * Config class
  */
 class Config {
