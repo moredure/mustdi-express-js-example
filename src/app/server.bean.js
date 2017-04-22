@@ -22,12 +22,11 @@ class Server {
   start() {
     const app = this._app.build();
     const PORT = app.get('port');
-
     const server = app.listen(PORT, () => {
       this._logger.log('App is listening on port:', PORT);
     });
 
-    this._serverCloser.on('close', () => {
+    this._serverCloser.onClose(() => {
       server.close();
       this._mongodb.close();
       this._logger.log('App Closed');

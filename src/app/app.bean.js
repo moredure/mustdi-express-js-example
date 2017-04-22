@@ -19,16 +19,12 @@ class ExpressApplication {
    */
   build() {
     const app = this._express();
-
     app.set('port', this._config.get('port'));
-
     app.use('/', this._router.build());
-
     if (app.get('env') === 'production') {
       const helmet = require('helmet');
       app.use(helmet());
     }
-
     return app;
   }
 }

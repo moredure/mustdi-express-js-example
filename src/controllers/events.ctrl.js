@@ -21,7 +21,7 @@ class EventsController {
    * @param  {Function} next example
    */
   close(req, res) {
-    this._serverCloser.emit('close');
+    this._serverCloser.close();
     res.json({event: 'CLOSED'});
   }
 }
