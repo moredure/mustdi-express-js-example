@@ -7,11 +7,25 @@ class Config {
    * @singleton
    * @param {DiExternalDependency} nconf nconf
    * @param {DiExternalDependency} path path
+   * @param {DiExternalDependency} dotenv dotenv
    */
-  constructor(nconf, path) {
-    nconf.env(['NODE_ENV']);
+  constructor(nconf, path, dotenv) {
+    dotenv.load();
+    nconf.env(['NODE_ENV', 'SECRET']); // secret from dotenv file in app root
     nconf.defaults({NODE_ENV: 'development'});
-    nconf.file('default', {file: path.join(__dirname, 'config.dev.json')});
+    const NODE_ENV = nconf.get('NODE_ENV');
+    if (NODE_ENV === 'production') {
+      nconf.file('production', {
+        file: path.join(__dirname, 'config.prod.json'),
+      });
+    } else if (NODE_ENV === 'testing') {
+      nconf.file('testing', {
+        file: path.join(__dirname, 'config.test.json'),
+      });
+    }
+    nconf.file('default', {
+      file: path.join(__dirname, 'config.dev.json'),
+    });
     return nconf;
   }
 }

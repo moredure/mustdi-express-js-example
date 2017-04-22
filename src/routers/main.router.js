@@ -7,18 +7,22 @@ class Router {
    * @singleton
    * @param {DiExternalDependency} express express
    * @param {UsersController} usersCtrl usersCtrl
+   * @param {EventsController} eventsCtrl eventsCtrl
    */
-  constructor(express, usersCtrl) {
+  constructor(express, usersCtrl, eventsCtrl) {
     this._express = express;
     this._usersCtrl = usersCtrl;
+    this._eventsCtrl = eventsCtrl;
   }
   /**
    * Build router
    * @return {Router} express router
    */
   build() {
-    let router = new this._express.Router();
-    router.get('/users', this._usersCtrl.getUsers);
+    const router = new this._express.Router();
+    router.get('/users', this._usersCtrl.index);
+    router.post('/users', this._usersCtrl.create);
+    router.get('/close', this._eventsCtrl.close);
     return router;
   }
 }

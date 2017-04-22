@@ -1,5 +1,5 @@
 {
-  "mongoUrl": "mongodb://localhost/db1",
+  "mongoUrl": "mongodb://localhost/dev_db",
   "port": 3000,
   "user": {
     "name": "Mikhail Faraponov",

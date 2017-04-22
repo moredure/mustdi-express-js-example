@@ -9,13 +9,11 @@ class UsersController {
    * @param {User} user model
    * @param {DiExternalDependency} $ react-autobind
    * @param {Logger} logger logger
-   * @param {Config} config config
    */
-  constructor(serverCloser, User, $, logger, config) {
+  constructor(serverCloser, User, $, logger) {
     this._serverCloser = serverCloser;
     this._User = User;
     this._logger = logger;
-    this._config = config;
     $(this);
   }
   /**
@@ -24,15 +22,37 @@ class UsersController {
    * @param  {Object}   res  example
    * @param  {Function} next example
    */
-  getUsers(req, res, next) {
+  create(req, res, next) {
     this._User
-      .create(this._config.get('user'))
+      .create(req.query)
       .then((user) => {
-        res.json(user);
         this._logger.log('Created user', user);
-        this._serverCloser.emit('close');
+        return res.json(user);
       })
-      .catch((x) => res.send(JSON.stringify(x)));
+      .catch(next);
+  }
+  /**
+   * [index description]
+   * @param  {[type]} req [description]
+   * @param  {[type]} res [description]
+   */
+  async index(req, res, next) {
+    try {
+      let users = await this._User.find({});
+      this._logger.log('All users', users);
+      res.json(users);
+    } catch(e) {
+      next(e);
+    }
+  }
+  /**
+   * [close description]
+   * @param  {[type]} req [description]
+   * @param  {[type]} res [description]
+   */
+  close(req, res) {
+    this._serverCloser.emit('close');
+    res.json({event: 'CLOSED'});
   }
 }
 

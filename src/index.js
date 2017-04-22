@@ -1,4 +1,4 @@
-const Di = require('dihard');
+const Di = require('mustdi');
 
 class ExpressTestApplication {
   /**
@@ -7,9 +7,9 @@ class ExpressTestApplication {
    */
   static main() {
     const container = new Di.DefaultContainer(__dirname, [
-      './controllers/*.ctrl.js',
-      './server/*.server.js',
+      './app/*.js',
       './events/*.bean.js',
+      './controllers/*.ctrl.js',
       './db-adapters/*.db.js',
       './models/*.model.js',
       './routers/*.router.js',
