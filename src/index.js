@@ -8,7 +8,6 @@ class ExpressTestApplication {
   static main() {
     const container = new Di.DefaultContainer(__dirname, [
       './app/*.js',
-      './events/*.bean.js',
       './controllers/*.ctrl.js',
       './db-adapters/*.db.js',
       './models/*.model.js',
