@@ -1,4 +1,4 @@
-const Di = require('mustdi');
+const Di = require('dihard');
 
 class ExpressTestApplication {
   /**
@@ -14,7 +14,7 @@ class ExpressTestApplication {
       './models/*.model.js',
       './routers/*.router.js',
       './config/*.config.js',
-      './logger/*.logger.js',
+      './loggers/*.logger.js',
     ]);
     container.getBean('Server').start();
   }

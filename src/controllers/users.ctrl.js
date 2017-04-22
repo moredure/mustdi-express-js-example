@@ -9,11 +9,13 @@ class UsersController {
    * @param {User} user model
    * @param {DiExternalDependency} $ react-autobind
    * @param {Logger} logger logger
+   * @param {Config} config config
    */
-  constructor(serverCloser, User, $, logger) {
+  constructor(serverCloser, User, $, logger, config) {
     this._serverCloser = serverCloser;
     this._User = User;
     this._logger = logger;
+    this._config = config;
     $(this);
   }
   /**
@@ -24,7 +26,7 @@ class UsersController {
    */
   getUsers(req, res, next) {
     this._User
-      .create({name: 'Mark Tsukerberg'})
+      .create(this._config.get('user'))
       .then((user) => {
         res.json(user);
         this._logger.log('Created user', user);
