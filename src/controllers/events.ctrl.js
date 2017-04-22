@@ -15,9 +15,10 @@ class EventsController {
     $(this);
   }
   /**
-   * [close description]
-   * @param  {[type]} req [description]
-   * @param  {[type]} res [description]
+   * Close application and all connections
+   * @param  {Object} req express request
+   * @param  {Object} res express response
+   * @param  {Function} next example
    */
   close(req, res) {
     this._serverCloser.emit('close');

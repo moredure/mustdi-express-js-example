@@ -1,3 +1,6 @@
+/**
+ * Logger
+ */
 class Logger {
   /**
    * Logger constructor

@@ -18,8 +18,12 @@ class UsersController {
   }
   /**
    * Get some users example
-   * @param  {Object}   req  example
-   * @param  {Object}   res  example
+   * @param  {Object} req express request
+   * query:
+   * {
+   *   name: String
+   * }
+   * @param  {Object} res express response
    * @param  {Function} next example
    */
   create(req, res, next) {
@@ -32,9 +36,10 @@ class UsersController {
       .catch(next);
   }
   /**
-   * [index description]
-   * @param  {[type]} req [description]
-   * @param  {[type]} res [description]
+   * All users
+   * @param  {Object} req express request
+   * @param  {Object} res express response
+   * @param  {Function} next example
    */
   async index(req, res, next) {
     try {
@@ -44,15 +49,6 @@ class UsersController {
     } catch(e) {
       next(e);
     }
-  }
-  /**
-   * [close description]
-   * @param  {[type]} req [description]
-   * @param  {[type]} res [description]
-   */
-  close(req, res) {
-    this._serverCloser.emit('close');
-    res.json({event: 'CLOSED'});
   }
 }
 
