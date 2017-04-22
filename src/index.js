@@ -3,7 +3,7 @@ const Di = require('mustdi');
 class ExpressTestApplication {
   /**
    * Main method as main in java ;)
-   * With Js and mustdi nothing is not impossible
+   * With Js and mustdi nothing is impossible
    */
   static main() {
     const container = new Di.DefaultContainer(__dirname, [
