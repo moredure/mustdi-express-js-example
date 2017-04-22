@@ -20,6 +20,6 @@ class ExpressTestApplication {
   }
 }
 
-if (require.main === module) {
+if (module === require.main) {
   ExpressTestApplication.main();
 }
