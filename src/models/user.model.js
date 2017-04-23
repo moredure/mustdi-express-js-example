@@ -8,7 +8,7 @@ class User {
    * User constructor
    * @singleton
    * @param {MongoDb} db db
-   * @return {Mongoose} driver
+   * @return {User} model
    */
   constructor(db) {
     const userSchema = new Schema({
