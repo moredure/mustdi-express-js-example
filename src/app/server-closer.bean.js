@@ -1,9 +1,10 @@
+const {EventEmitter} = require('events');
 const CLOSE = 'CLOSE';
 
 /**
  * ServerCloser
  */
-class ServerCloser extends require('events').EventEmitter {
+class ServerCloser extends EventEmitter {
   /**
    * ServerCloser close
    * @singleton

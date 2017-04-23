@@ -1,5 +1,3 @@
-const $ = require('react-autobind');
-
 /**
  * EventsController class
  */
@@ -9,8 +7,9 @@ class EventsController {
    * @singleton
    * @param {ServerCloser} router some router
    * @param {Logger} logger logger
+   * @param  {DiExternalDependency} $ react-autobind
    */
-  constructor(serverCloser, logger) {
+  constructor(serverCloser, logger, $) {
     this._serverCloser = serverCloser;
     this._logger = logger;
     $(this);

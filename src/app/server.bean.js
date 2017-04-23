@@ -1,5 +1,3 @@
-const $ = require('react-autobind');
-
 /**
  * Server class
  */
@@ -13,8 +11,9 @@ class Server {
    * @param {ExpressApplication} app
    * @param {Config} config
    * @param {Object} server server
+   * @param {DiExternalDependency} $ react-autobind
    */
-  constructor(serverCloser, mongodb, logger, app, config, server) {
+  constructor(serverCloser, mongodb, logger, app, config, server, $) {
     this._serverCloser = serverCloser;
     this._mongodb = mongodb;
     this._logger = logger;

@@ -16,8 +16,8 @@ class Config {
     this._dotenv = dotenv;
   }
   /**
-   * [createConfig description]
-   * @return {[type]} [description]
+   * Creates configuration
+   * @return {Object} nconf object
    */
   createConfig() {
     this._dotenv.load();

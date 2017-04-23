@@ -1,5 +1,3 @@
-const $ = require('react-autobind');
-
 /**
  * Logger
  */
@@ -7,8 +5,9 @@ class Logger {
   /**
    * Logger constructor
    * @param  {DiCaller} className name of caller class
+   * @param  {DiExternalDependency} $ react-autobind
    */
-  constructor(className) {
+  constructor(className, $) {
     this._className = className;
     $(this);
   }

@@ -1,5 +1,3 @@
-const $ = require('react-autobind');
-
 /**
  * ErrorsController class
  */
@@ -8,8 +6,9 @@ class ErrorsController {
    * ErrorsController
    * @singleton
    * @param {Logger} logger logger
+   * @param {DiExternalDependency} $ react-autobind
    */
-  constructor(logger) {
+  constructor(logger, $) {
     this._logger = logger;
     $(this);
   }

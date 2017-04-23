@@ -1,5 +1,3 @@
-const $ = require('react-autobind');
-
 /**
  * UsersController class
  */
@@ -9,8 +7,9 @@ class UsersController {
    * @singleton
    * @param {UserMongo} user model
    * @param {Logger} logger logger
+   * @param  {DiExternalDependency} $ react-autobind
    */
-  constructor(UserMongo, logger) {
+  constructor(UserMongo, logger, $) {
     this._UserMongo = UserMongo;
     this._logger = logger;
     $(this);
