@@ -1,4 +1,4 @@
-# mustdi express js example
+# mustdi express js example of using dependency injection with js
 ```js
 const Di = require('mustdi');
 
