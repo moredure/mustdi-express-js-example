@@ -1,5 +1,3 @@
-const {Schema} = require('mongoose');
-
 /**
  * UserMongo class
  */
@@ -9,17 +7,19 @@ class UserMongo {
    * @singleton
    * @method createModel
    * @param {MongoDb} db db
+   * @param {DiExternalDependency} mongoose mongoose
    * @return {UserMongo} model
    */
-  constructor(db) {
+  constructor(db, {Schema}) {
     this._db = db;
+    this._Schema = Schema;
   }
   /**
    * [createModel description]
    * @return {[type]} [description]
    */
   createModel() {
-    const userSchema = new Schema({
+    const userSchema = new this._Schema({
       name: {
         type: String,
         required: true,
