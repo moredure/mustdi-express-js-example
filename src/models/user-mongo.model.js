@@ -7,10 +7,18 @@ class UserMongo {
   /**
    * UserMongo constructor
    * @singleton
+   * @method createModel
    * @param {MongoDb} db db
    * @return {UserMongo} model
    */
   constructor(db) {
+    this._db = db;
+  }
+  /**
+   * [createModel description]
+   * @return {[type]} [description]
+   */
+  createModel() {
     const userSchema = new Schema({
       name: {
         type: String,
@@ -19,7 +27,7 @@ class UserMongo {
     });
     userSchema.statics.all = this.all;
     userSchema.statics.new = this.new;
-    return db.model(UserMongo.name, userSchema);
+    return this._db.model(UserMongo.name, userSchema);
   }
   /**
    * Create new user

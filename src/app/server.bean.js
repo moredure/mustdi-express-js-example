@@ -27,18 +27,20 @@ class Server {
    * Start server
    */
   start() {
-    const app = this._app.build();
     const PORT = this._config.get('port');
-    this._server = app.listen(PORT, this._onListen);
-    this._serverCloser.onClose(this._onClose);
+    const server = this._app.listen(PORT, this._onListen);
+    this._serverCloser.onClose(this._onClose(server));
+    return server;
   }
   /**
    * On closing
    */
-  _onClose() {
-    this._server.close();
-    this._mongodb.close();
-    this._logger.log('App Closed');
+  _onClose(server) {
+    return () => {
+      server.close();
+      this._mongodb.close();
+      this._logger.log('App Closed');
+    };
   }
   /**
    * On server listening

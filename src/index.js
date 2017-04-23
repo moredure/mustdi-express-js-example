@@ -18,7 +18,7 @@ class ExpressTestApplication {
       './config/*.config.js',
       './loggers/*.logger.js',
     ]);
-    container.getBean('Server').start();
+    const server = container.getBean('Config').start();
   }
 }
 

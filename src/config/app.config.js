@@ -1,7 +1,3 @@
-const nconf = require('nconf');
-const path = require('path');
-const dotenv = require('dotenv');
-
 /**
  * Config class
  */
@@ -9,26 +5,38 @@ class Config {
   /**
    * Config
    * @singleton
+   * @method createConfig
+   * @param {DiExternalDependency} nconf nconf
+   * @param {DiExternalDependency} path path
+   * @param {DiExternalDependency} dotenv dotenv
    */
-  constructor() {
-    dotenv.load();
-    nconf.env(['NODE_ENV', 'SECRET']); // secret from dotenv file in app root
-    nconf.defaults({NODE_ENV: 'development'});
-    const NODE_ENV = nconf.get('NODE_ENV');
+  constructor(nconf, path, dotenv) {
+    this._nconf = nconf;
+    this._path = path;
+    this._dotenv = dotenv;
+  }
+  /**
+   * [createConfig description]
+   * @return {[type]} [description]
+   */
+  createConfig() {
+    this._dotenv.load();
+    this._nconf.env(['NODE_ENV', 'SECRET']); // secret from dotenv file in app root
+    this._nconf.defaults({NODE_ENV: 'development'});
+    const NODE_ENV = this._nconf.get('NODE_ENV');
     if (NODE_ENV === 'production') {
-      nconf.file('production', {
-        file: path.join(__dirname, 'config.prod.json'),
+      this._nconf.file('production', {
+        file: this._path.join(__dirname, 'config.prod.json'),
       });
     } else if (NODE_ENV === 'testing') {
-      nconf.file('testing', {
-        file: path.join(__dirname, 'config.test.json'),
+      this._nconf.file('testing', {
+        file: this._path.join(__dirname, 'config.test.json'),
       });
     }
-    nconf.file('default', {
-      file: path.join(__dirname, 'config.dev.json'),
+    this._nconf.file('default', {
+      file: this._path.join(__dirname, 'config.dev.json'),
     });
-    console.log(nconf.get());
-    return nconf;
+    return this._nconf;
   }
 }
 

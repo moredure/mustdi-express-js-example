@@ -1,17 +1,17 @@
 const $ = require('react-autobind');
 
 /**
- * UsersController class
+ * OtherUsersController class
  */
-class UsersController {
+class OtherUsersController {
   /**
-   * UsersController
+   * OtherUsersController
    * @singleton
-   * @param {UserMongo} user model
+   * @param {UserPostgres} user model
    * @param {Logger} logger logger
    */
-  constructor(UserMongo, logger) {
-    this._UserMongo = UserMongo;
+  constructor(UserPostgres, logger) {
+    this._UserPostgres = UserPostgres;
     this._logger = logger;
     $(this);
   }
@@ -23,7 +23,7 @@ class UsersController {
    */
   async index(req, res, next) {
     try {
-      const users = await this._UserMongo.all();
+      const users = await this._UserPostgres.all();
       this._logger.log('All users', users.length);
       res.json(users);
     } catch(e) {
@@ -42,7 +42,7 @@ class UsersController {
    */
   async create(req, res, next) {
     try {
-      const user = await this._UserMongo.new(req.query.name);
+      const user = await this._UserPostgres.new(req.query.name);
       this._logger.log('Created users', user);
       return res.json(user);
     } catch(e) {
@@ -51,4 +51,4 @@ class UsersController {
   }
 }
 
-module.exports = UsersController;
+module.exports = OtherUsersController;

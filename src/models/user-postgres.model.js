@@ -9,15 +9,15 @@ class UserPostgres {
    * @return {UserPostgres} model
    */
   constructor(db) {
-    this.db = db;
+    this._db = db;
   }
   /**
    * Create new user
    * @param  {String} name [description]
    * @return {Promise} new user
    */
-  new(name) {
-    return this.db.one(`
+  save(name) {
+    return this._db.one(`
       INSERT INTO users(name) VALUES (\${name}) RETURNING id, name;
     `, {name});
   }
@@ -26,7 +26,7 @@ class UserPostgres {
    * @return {Promise} all users
    */
   all() {
-    return this.db.manyOrNone(`
+    return this._db.manyOrNone(`
       SELECT * FROM users;
     `);
   }
