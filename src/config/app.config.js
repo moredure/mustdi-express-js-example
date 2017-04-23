@@ -27,6 +27,7 @@ class Config {
     nconf.file('default', {
       file: path.join(__dirname, 'config.dev.json'),
     });
+    console.log(nconf.get());
     return nconf;
   }
 }

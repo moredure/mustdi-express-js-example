@@ -1,5 +1,6 @@
 {
   "mongoUrl": "mongodb://localhost/dev_db",
+  "postgresUrl": "postgres://postgres:somepasswd@localhost/db",
   "port": 3000,
   "user": {
     "name": "Mikhail Faraponov",

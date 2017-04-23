@@ -1,14 +1,14 @@
 const {Schema} = require('mongoose');
 
 /**
- * User class
+ * UserMongo class
  */
-class User {
+class UserMongo {
   /**
-   * User constructor
+   * UserMongo constructor
    * @singleton
    * @param {MongoDb} db db
-   * @return {User} model
+   * @return {UserMongo} model
    */
   constructor(db) {
     const userSchema = new Schema({
@@ -19,7 +19,7 @@ class User {
     });
     userSchema.statics.all = this.all;
     userSchema.statics.new = this.new;
-    return db.model(User.name, userSchema);
+    return db.model(UserMongo.name, userSchema);
   }
   /**
    * Create new user
@@ -27,15 +27,15 @@ class User {
    * @return {Promise} new user
    */
   new(name) {
-    return this.model(User.name).create({name});
+    return this.model(UserMongo.name).create({name});
   }
   /**
    * Get all users
    * @return {Promise} all users
    */
   all() {
-    return this.model(User.name).find({});
+    return this.model(UserMongo.name).find({});
   }
 }
 
-module.exports = User;
+module.exports = UserMongo;
