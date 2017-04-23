@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const bluebird = require('bluebird');
+
 /**
  * MongoDb class
  */
@@ -5,12 +8,10 @@ class MongoDb {
   /**
    * MongoDb constructor
    * @singleton
-   * @param {DiExternalDependency} mongoose mongoose
-   * @param {DiExternalDependency} bluebird bluebird
    * @param {Config} config config
    * @return mongoose driver
    */
-  constructor(mongoose, bluebird, config) {
+  constructor(config) {
     mongoose.Promise = bluebird;
     return mongoose.createConnection(config.get('mongoUrl'));
   }

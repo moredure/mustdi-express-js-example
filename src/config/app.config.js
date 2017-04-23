@@ -1,3 +1,7 @@
+const nconf = require('nconf');
+const path = require('path');
+const dotenv = require('dotenv');
+
 /**
  * Config class
  */
@@ -5,11 +9,8 @@ class Config {
   /**
    * Config
    * @singleton
-   * @param {DiExternalDependency} nconf nconf
-   * @param {DiExternalDependency} path path
-   * @param {DiExternalDependency} dotenv dotenv
    */
-  constructor(nconf, path, dotenv) {
+  constructor() {
     dotenv.load();
     nconf.env(['NODE_ENV', 'SECRET']); // secret from dotenv file in app root
     nconf.defaults({NODE_ENV: 'development'});

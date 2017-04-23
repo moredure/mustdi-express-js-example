@@ -1,3 +1,5 @@
+const $ = require('react-autobind');
+
 /**
  * UsersController class
  */
@@ -7,10 +9,9 @@ class UsersController {
    * @singleton
    * @param {ServerCloser} router some router
    * @param {User} user model
-   * @param {DiExternalDependency} $ react-autobind
    * @param {Logger} logger logger
    */
-  constructor(serverCloser, User, $, logger) {
+  constructor(serverCloser, User, logger) {
     this._serverCloser = serverCloser;
     this._User = User;
     this._logger = logger;
@@ -26,14 +27,14 @@ class UsersController {
    * @param  {Object} res express response
    * @param  {Function} next example
    */
-  create(req, res, next) {
-    this._User
-      .create(req.query)
-      .then((user) => {
-        this._logger.log('Created user', user);
-        return res.json(user);
-      })
-      .catch(next);
+  async create(req, res, next) {
+    try {
+      const user = await this._User.new(req.query.name);
+      this._logger.log('Created user', user);
+      return res.json(user);
+    } catch(e) {
+      return next(e);
+    }
   }
   /**
    * All users
@@ -43,11 +44,11 @@ class UsersController {
    */
   async index(req, res, next) {
     try {
-      let users = await this._User.find({});
-      this._logger.log('All users', users);
+      let users = await this._User.all();
+      this._logger.log('All users', users.length);
       res.json(users);
     } catch(e) {
-      next(e);
+      return next(e);
     }
   }
 }
